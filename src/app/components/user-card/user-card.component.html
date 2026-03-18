@@ -7,11 +7,11 @@
     </div>
     <div class="card-footer bg-white border-0">
         <div class="d-flex justify-content-around">
-            <div class="text-center" (click)="onView()">
+            <div class="text-center" [routerLink]="['/user',myUser()?._id]">
                 <i class="bi bi-search fs-4"></i>
                 <div class="small"> Ver detalle</div>
             </div>
-            <div class="text-center" (click)="onUpdate()">
+            <div class="text-center" [routerLink]="['/updateUser', myUser()?._id]">
                 <i class="bi bi-arrow-repeat fs-4"></i>
                 <div class="small">Actualizar</div>
             </div>

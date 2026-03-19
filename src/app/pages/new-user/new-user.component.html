@@ -1,1 +1,67 @@
-<p>new-user works!</p>
+<section class="container my-5">
+    <h3 class="text-center mb-4"> NUEVO USUARIO</h3>
+
+    <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label"> Nombre Usuario </label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre"
+                placeholder="Introduzca su nombre de usuario">
+
+            @if (checkControl('nombre', 'required')){
+            <p class="text-danger mt-1"> Campo obligatorio</p>
+            }
+
+            @if(checkControl('nombre', 'minlength')){
+            <p class="text-danger mt-1">Campo con longitud mínima de 3 caracteres</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="apellido" class="form-label"> Apellido Usuario </label>
+            <input type="text" class="form-control" id="apellido" formControlName="apellido"
+                placeholder="Introduzca su apellido">
+
+            @if (checkControl('apellido', 'required')){
+            <p class="text-danger mt-1"> Campo obligatorio</p>
+            }
+
+            @if(checkControl('apellido', 'minlength')){
+            <p class="text-danger mt-1">Campo con longitud mínima de 3 caracteres</p>
+            }
+
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label"> Email Usuario </label>
+            <input type="email" class="form-control" id="email" formControlName="email"
+                placeholder="Introduzca su email de usuario">
+
+            @if(checkControl('email', 'required')){
+            <p class="text-danger mt-1">Campo Requerido</p>
+            }
+
+            @if(checkControl('email', 'pattern')){
+            <p class="text-danger mt-1">El formato del email no es correcto</p>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label"> Imagen Usuario </label>
+            <input type="text" class="form-control" id="imagen" formControlName="imagen"
+                placeholder="Introduzca su imagen de usuario">
+
+            @if(checkControl('imagen', 'required')){
+            <p class="text-danger mt-1">Campo Requerido</p>
+            }
+
+            @if(checkControl('imagen', 'pattern')){
+            <p class="text-danger mt-1">El formato de la imagen no es correcta</p>
+            }
+        </div>
+
+        <input type="submit" value="Guardar" class="btn btn-primary">
+    </form>
+
+
+</section>

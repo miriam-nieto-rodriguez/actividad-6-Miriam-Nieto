@@ -18,4 +18,9 @@ export class UserServices {
     return lastValueFrom(this.httpClient.get<IUser>(`${this.apiUrl}/${_id}`))
   }
 
+  createUser(user: IUser): Promise<IUser> {
+    return lastValueFrom(this.httpClient.post<IUser>(this.apiUrl, user))
+  }
+
+
 }

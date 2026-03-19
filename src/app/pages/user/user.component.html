@@ -1,1 +1,26 @@
-<p>user works!</p>
+<div class="container mt-5">
+    <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start mt-3">
+        <figure>
+            <img class="rounded-circle img-fluid me-3 mb-lg-0" style="width: 400px; height: 400px; object-fit:cover;"
+                [src]="user()?.image" [alt]="user()?.first_name">
+        </figure>
+        <!-- Línea vertical -->
+        <div class="vr me-3 d-none d-lg-block mx-lg-3" style="width: 3px"></div>
+
+        <!-- Datos usuario y botonesd-->
+        <div class="d-flex flex-column mt-5 ms-5 ms-lg-4 text-center text-lg-start">
+            <h4 class="mb-5">{{user()?.first_name}} {{user()?.last_name}}</h4>
+            <p><strong>Nombre Usuario:</strong> {{user()?.username}}</p>
+            <p><strong>Email:</strong> {{user()?.email}}</p>
+
+            <!--Botones  -->
+            <div class="d-flex justify-content-center justify-content-lg-start gap-2 mt-2 flex-wrap">
+                <button class="btn btn-danger">Eliminar</button>
+                <button class="btn btn-primary">Actualizar</button>
+                <button class="btn btn-secondary">Volver al listado</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

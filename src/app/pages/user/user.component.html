@@ -7,7 +7,7 @@
         <!-- Línea vertical -->
         <div class="vr me-3 d-none d-lg-block mx-lg-3" style="width: 3px"></div>
 
-        <!-- Datos usuario y botonesd-->
+        <!-- Datos usuario y botones-->
         <div class="d-flex flex-column mt-5 ms-5 ms-lg-4 text-center text-lg-start">
             <h4 class="mb-5">{{user()?.first_name}} {{user()?.last_name}}</h4>
             <p><strong>Nombre Usuario:</strong> {{user()?.username}}</p>
@@ -15,9 +15,9 @@
 
             <!--Botones  -->
             <div class="d-flex justify-content-center justify-content-lg-start gap-2 mt-2 flex-wrap">
-                <button class="btn btn-danger" (click)="eliminarUsuario()" >Eliminar</button>
-                <button class="btn btn-primary" [routerLink]="['/newUser']">Actualizar</button>
-                <button class="btn btn-secondary" [routerLink]="['/userCard']">Volver al listado</button>
+                <button class="btn btn-danger" (click)="eliminarUsuario(user()?._id)" >Eliminar</button>
+                <button class="btn btn-primary" [routerLink]="['/updateUser', user()?._id]">Actualizar</button>
+                <button class="btn btn-secondary" [routerLink]="['/home']">Volver al listado</button>
             </div>
         </div>
     </div>

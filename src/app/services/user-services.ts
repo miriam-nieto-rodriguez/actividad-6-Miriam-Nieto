@@ -14,7 +14,7 @@ export class UserServices {
     return lastValueFrom(this.httpClient.get<IUserResponse>(this.apiUrl))
   }
 
-  getById (_id: string): Promise<IUser> {
+  getById (_id: string | undefined): Promise<IUser> {
     return lastValueFrom(this.httpClient.get<IUser>(`${this.apiUrl}/${_id}`))
   }
 
@@ -22,5 +22,8 @@ export class UserServices {
     return lastValueFrom(this.httpClient.post<IUser>(this.apiUrl, user))
   }
 
+  deleteById(_id:string | undefined): Promise<IUser> {
+    return lastValueFrom(this.httpClient.delete<IUser>(`${this.apiUrl}/${_id}`))
+  }
 
 }

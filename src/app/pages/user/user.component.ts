@@ -1,7 +1,9 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, EventEmitter, inject, input, Output, signal } from '@angular/core';
 import { UserServices } from '../../services/user-services';
 import { IUser } from '../../interface/iuser.interface';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-user',
@@ -12,21 +14,53 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 export class UserComponent {
   _id = input<string>()
   userServices = inject(UserServices)
-  user = signal<IUser | null>(null)  
-  route = inject(ActivatedRoute)
+  user = signal<IUser | null>(null)
+  router = inject(Router)
 
-  async ngOnInit (){
-   
-    const _id = this.route.snapshot.params['_id']
-    this.user.set (await this.userServices.getById(_id))
+  ngOnInit() {
+    this.cargarContenido()
 
   }
 
-  eliminarUsuario(){
+  async cargarContenido() {
+    try {
+      this.user.set(await this.userServices.getById(this._id()))
+
+    } catch (error) {
+      console.error(error)
+    }
 
   }
 
 
+  async eliminarUsuario(_id: string | undefined) {
+    const result = await Swal.fire({
+      title: `¿Seguro que quieres eliminar al usuario ${this.user()?.first_name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+    if (result.isConfirmed) {
+      try {
+        const response = await this.userServices.deleteById(_id)
+        if (response._id) {
+          toast.error(`Usuario con nombre ${response.first_name} ha sido eliminado`)
 
+          this.router.navigate(['/home'])
+        }
+
+      } catch (error) {
+        console.error(error)
+        toast.error('Error al eliminar usuario')
+      }
+    }
+
+  }
 
 }
+
+
+
+
+

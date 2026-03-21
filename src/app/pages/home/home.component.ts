@@ -22,4 +22,12 @@ export class HomeComponent {
       console.error(error)
     }
   }
+
+  eventDelete (event:boolean){
+    if (event) {
+      this.ngOnInit()
+    }
+  }
+
+
 }

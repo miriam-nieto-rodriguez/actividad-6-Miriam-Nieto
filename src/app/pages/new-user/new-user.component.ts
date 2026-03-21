@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserServices } from '../../services/user-services';
 import { IUser } from '../../interface/iuser.interface';
@@ -15,10 +15,14 @@ export class NewUserComponent {
   userForm: FormGroup;
   userServices = inject(UserServices)
   router = inject(Router)
+  _id = input<string>()
+  title: string = "Registrar"
+  user = signal<IUser | undefined>(undefined)
+
 
   constructor() {
     this.userForm = new FormGroup({
-      nombre: new FormControl ('', [
+      nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3)
       ]),
@@ -35,28 +39,62 @@ export class NewUserComponent {
         Validators.pattern(/^https?:\/\//)
       ])
 
-    })
+    }, [])
   }
 
-  checkControl (controlName:string, errorName: string): boolean | undefined {
+  checkControl(controlName: string, errorName: string): boolean | undefined {
     return this.userForm.get(controlName)?.hasError(errorName) && this.userForm.get(controlName)?.touched;
   }
 
+  async ngOnInit() {
+    if (this._id()) {
+      this.title = "Actualizar"
+
+      this.user.set(await this.userServices.getById(this._id()))
+
+      this.userForm.patchValue({
+        _id: this.user()?._id,
+        nombre: this.user()?.first_name,
+        apellido: this.user()?.last_name,
+        email: this.user()?.email,
+        imagen: this.user()?.image
+      })
+  }
+}
 
   async getDataForm(){
-    let user: IUser = this.userForm.value
-    
+  if (this._id()){
     try {
-      let response = await this.userServices.createUser(user)
-      if (response){
-        toast.success('Usuario creado correctamente')
-        console.log ('Respuesta:', response)
+      console.log (this.userForm.value)
+      const response = await this.userServices.updateUser(this.userForm.value, this._id())
+
+      if (response._id){
+        toast.success(`Usuario ${response.first_name} actualizado correctamente`)
         this.router.navigate(['/home'])
       }
-    } catch (error){
-      console.error (error)
-      toast.error ('Error al crear usuario')
+
+    }catch (error){
+      console.log (error)
+      toast.error ('Error al actualizar usuario')
+     
+    }
+  } else {
+
+    try {
+      let response = await this.userServices.createUser(this.userForm.value)
+      if (response) {
+        toast.success('Usuario creado correctamente')
+        console.log('Respuesta:', response)
+        this.router.navigate(['/home'])
+      }
+      this.userForm.reset()
+  
+    } catch (error) {
+      console.error(error)
+      toast.error('Error al crear usuario')
     }
   }
+
+}
 
 }

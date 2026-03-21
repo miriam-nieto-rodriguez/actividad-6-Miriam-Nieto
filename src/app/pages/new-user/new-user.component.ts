@@ -45,14 +45,17 @@ export class NewUserComponent {
 
   async getDataForm(){
     let user: IUser = this.userForm.value
+    
     try {
       let response = await this.userServices.createUser(user)
       if (response){
+        toast.success('Usuario creado correctamente')
         console.log ('Respuesta:', response)
         this.router.navigate(['/home'])
       }
     } catch (error){
       console.error (error)
+      toast.error ('Error al crear usuario')
     }
   }
 

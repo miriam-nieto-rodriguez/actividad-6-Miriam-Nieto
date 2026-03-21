@@ -1,6 +1,6 @@
 <article class="card text-center h-100">
-    <figure>
-        <img class="user-img" [src]="myUser()?.image" alt="usuario">
+    <figure class=" pt-3">
+        <img class="rounded-circle mx-auto d-block object-fit=cover" [src]="myUser()?.image" alt="usuario" width="200" height="200" >
     </figure>
     <div class="card-body">
         <h5 class="card-title"> {{myUser()?.first_name}} {{myUser()?.last_name}}</h5>
@@ -8,15 +8,15 @@
     <div class="card-footer bg-white border-0">
         <div class="d-flex justify-content-around">
             <div class="text-center" [routerLink]="['/user',myUser()?._id]">
-                <i class="iconos bi bi-search fs-4"></i>
+                <i class="iconos bi bi-search fs-4" style="cursor: pointer;"></i>
                 <div class="small"> Ver detalle</div>
             </div>
             <div class="text-center" [routerLink]="['/updateUser', myUser()?._id]">
-                <i class="iconos bi bi-arrow-repeat fs-4"></i>
+                <i class="iconos bi bi-arrow-repeat fs-4" style="cursor: pointer;"></i>
                 <div class="small">Actualizar</div>
             </div>
             <div class="text-center" (click)="deleteUsuario(myUser()?._id)">
-                <i class=" iconos bi bi-trash fs-4"></i>
+                <i class=" iconos bi bi-trash fs-4" style="cursor: pointer;"></i>
                 <div class="small">Borrar</div>
             </div>
         </div>

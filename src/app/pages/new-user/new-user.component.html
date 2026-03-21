@@ -1,5 +1,5 @@
 <section class="container my-5">
-    <h3 class="text-center mb-4"> NUEVO USUARIO</h3>
+    <h3 class="text-center mb-4"> {{title}} Usuario</h3>
 
     <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
 
@@ -60,7 +60,7 @@
             }
         </div>
 
-        <input type="submit" value="Guardar" class="btn btn-primary">
+        <input type="submit" [value]="title" class="btn btn-primary">
     </form>
 
 

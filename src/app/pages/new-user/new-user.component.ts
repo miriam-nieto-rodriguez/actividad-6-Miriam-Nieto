@@ -32,7 +32,7 @@ export class NewUserComponent {
       ]),
       email: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^\w+\@[a-zA-Z_0-9]+?\.[a-zA-Z]{2,3}$/)
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
       ]),
       imagen: new FormControl('', [
         Validators.required,

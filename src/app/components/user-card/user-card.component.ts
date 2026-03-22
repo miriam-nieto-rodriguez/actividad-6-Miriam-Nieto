@@ -29,7 +29,7 @@ export class UserCardComponent {
       try {
         const response = await this.userServices.deleteById(_id)
         if (response._id) {
-          toast.error(`Usuario con nombre ${response.first_name} ha sido eliminado`)
+          toast.warning(`Usuario con nombre ${response.first_name} ha sido eliminado`)
           this.deleteEmit.emit(true)
         }
 

@@ -1,0 +1,24 @@
+
+.logo-hover img{
+    transition: all 0.2 ease;
+}
+
+.logo-hover:hover img{
+    transform: scale(1.15);
+}
+
+.nav-link.active {
+    font-weight: 700;
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.nav-link {
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover{
+    color: #0d6efd ;
+    font-weight: 600;
+    transform: scale(1.05);
+}

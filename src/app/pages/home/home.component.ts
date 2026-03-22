@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { UserServices } from '../../services/user-services';
 import { IUser, IUserResponse } from '../../interface/iuser.interface';
 import { UserCardComponent } from "../../components/user-card/user-card.component";
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent {
     
     }catch(error) {
       console.error(error)
+      toast.error ('Error al cargar los usuarios')
     }
   }
 

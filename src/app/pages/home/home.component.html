@@ -1,6 +1,6 @@
 <div class="container">
     <section class="row">
-        @for (user of arrUsers(); track user._id){
+        @for (user of arrUsers(); track user._id) {
         <article class="col-12 col-md-6 col-lg-4 col-xl-3 gx-3 gy-3">
             <app-user-card [myUser]="user" (deleteEmit)="eventDelete($event)"></app-user-card>
         </article>
